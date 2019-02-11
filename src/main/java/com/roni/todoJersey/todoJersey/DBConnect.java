@@ -5,7 +5,7 @@ import java.sql.*;
 public class DBConnect {
 
 	String myDriver = "com.mysql.jdbc.Driver";
-	String myUrl = "jdbc:mysql://localhost:3306/todoservlet?useSSL=false";
+	String myUrl = "jdbc:mysql://localhost:3306/todoservlet?useSSL=false&useUnicode=yes&characterEncoding=UTF-8";
 
 	String userName = null;
 	String password = null;
