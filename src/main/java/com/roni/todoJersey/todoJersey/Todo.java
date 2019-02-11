@@ -11,7 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.sun.istack.internal.NotNull;
+import org.apache.log4j.Logger;
 
 
 @Path("/Todo")
@@ -20,10 +20,16 @@ public class Todo {
 	DAO dao;
 	ArrayList<Item> listOfItems;
 	String id,date,note,status;
+	final static Logger logger = Logger.getLogger(Todo.class);
+	
 	public Todo() {
         super();
 		System.out.println("constructor");
 		dao = new DAO();
+		//logs a debug message
+		if(logger.isDebugEnabled()){
+		    logger.debug("DAO Created!!!");
+		}
     }
 	@GET
 	@Path("/GetData")
@@ -37,7 +43,7 @@ public class Todo {
 	@Path("/AddItem")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-    public Response AddItem(@Valid @NotNull @QueryParam("note") String note,@Valid @NotNull @QueryParam("date") String date) {
+    public Response AddItem(@Valid  @QueryParam("note") String note,@Valid  @QueryParam("date") String date) {
 		System.out.println(note);
 		if(dao.addItem(date,note))
 			 return Response.ok().status(200).entity(Boolean.TRUE.toString()).build();
@@ -47,7 +53,7 @@ public class Todo {
 	@Path("/DeleteItem")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-    public Response DeleteItem(@Valid @NotNull @QueryParam("id") String id) {
+    public Response DeleteItem(@Valid  @QueryParam("id") String id) {
 		if(dao.deleteItem(id))
 			 return Response.ok().status(200).entity(Boolean.TRUE.toString()).build();
 		return Response.ok().status(200).entity(Boolean.FALSE.toString()).build();
@@ -56,7 +62,7 @@ public class Todo {
 	@Path("/UpdateItem")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-    public Response UpdateItem(@Valid @NotNull @QueryParam("id") String id,@Valid @NotNull @QueryParam("note") String note) {
+    public Response UpdateItem(@Valid  @QueryParam("id") String id,@Valid  @QueryParam("note") String note) {
 		if(dao.updateItem(id,note)) 
 			 return Response.ok().status(200).entity(Boolean.TRUE.toString()).build();
 		return Response.ok().status(200).entity(Boolean.FALSE.toString()).build();
@@ -65,7 +71,7 @@ public class Todo {
 	@Path("/DoneItem")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-    public Response DoneItem(@Valid @NotNull @QueryParam("id") String id,@Valid @NotNull @QueryParam("status") String status) {
+    public Response DoneItem(@Valid  @QueryParam("id") String id,@Valid  @QueryParam("status") String status) {
 		if(dao.doneItem(id,status))
 			 return Response.ok().status(200).entity(Boolean.TRUE.toString()).build();
 		return Response.ok().status(200).entity(Boolean.FALSE.toString()).build();

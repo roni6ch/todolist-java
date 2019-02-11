@@ -1,7 +1,7 @@
 
 <head>
 <meta charset="windows-1255">
-<title>Main</title>
+<title>TodoList - Java Jersey + Maven</title>
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet"
